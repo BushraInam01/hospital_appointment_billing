@@ -1,379 +1,232 @@
-# Hospital Appointment & Billing System
+# 🏥 Hospital Appointment & Billing System
 
-## Project Overview
+A Python-based Hospital Appointment & Billing System designed to manage patients, doctors, appointments, billing, insurance coverage, senior citizen discounts, cancellations, and clinic reports.
 
-The Hospital Appointment & Billing System is a Python-based project designed to manage patients, doctors, appointments, medical tests, billing, insurance coverage, and clinic reports.
-
-The project uses basic Python concepts such as dictionaries, lists, functions, loops, conditional statements, `*args`, `**kwargs`, lambda functions, list comprehensions, and exception/edge-case handling.
-
-The system is implemented using Python only, without classes, external libraries, databases, APIs, or frameworks.
+The project uses **JSON for data storage**, **Python Dataclasses as data models**, and **Error Handling** for invalid inputs and edge cases.
 
 ---
 
-## Features
+## 🚀 Features
 
-The system provides the following features:
+### 👤 Patient Management
+- Store patient information
+- Patient ID, name, age, city, and insurance status
+- Search patients by ID
+- Validate patient information
+- Identify senior and insured patients
 
-- Patient management
-- Doctor management
-- Appointment validation
-- Doctor availability validation
-- Appointment status validation
-- Medical test validation
-- Duplicate test detection
-- Test charge calculation
-- Insurance coverage calculation
-- Patient bill calculation
-- Senior citizen discount
-- Appointment cancellation
-- Appointment processing
-- Doctor statistics
-- Patient reports
-- Clinic dashboard
-- Revenue calculations
-- Highest spending patient detection
-- Most requested doctor and specialization
-- Lambda function for sorting patients by bill
-- List comprehensions for filtering patients
-- `*args` for calculating multiple charges
-- `**kwargs` for configurable billing
-- Edge-case testing
+### 👨‍⚕️ Doctor Management
+- Store doctor information
+- Doctor ID, name, specialization, fee, and availability
+- Search doctors by ID
+- Check doctor availability
+- Generate doctor statistics
 
----
+### 📅 Appointment Management
+- Manage hospital appointments
+- Process pending appointments
+- Mark processed appointments as completed
+- Prevent completed appointments from being processed again
+- Cancel pending appointments
+- Prevent completed appointments from being cancelled
+- Handle cancelled appointments correctly
 
-## Technologies Used
+### 💰 Billing System
+- Calculate consultation fees
+- Calculate test charges
+- Calculate subtotal
+- Calculate insurance coverage
+- Calculate patient's final responsibility
+- Apply senior citizen discount
 
-- Python 3
-- Lists
-- Dictionaries
-- Sets
-- Functions
-- Loops
-- Conditional Statements
-- `*args`
-- `**kwargs`
-- Lambda Functions
-- List Comprehensions
+### 🛡️ Insurance
+Insurance coverage is calculated as:
 
-No external libraries or frameworks are used.
+- 20% of consultation fee
+- 50% of test charges
 
----
+### 👴 Senior Citizen Discount
+Patients aged **60 or above** receive an additional **10% discount**.
 
-## Project Structure
+### 📊 Clinic Dashboard
+The dashboard displays:
 
-```text
-hospital_appointment_billing/
-│
-├── main.py
-└── README.md
+- Total patients
+- Total doctors
+- Total appointments
+- Completed appointments
+- Cancelled appointments
+- Pending appointments
+- Total consultation revenue
+- Total test revenue
+- Total insurance coverage
+- Total patient revenue
+- Most requested specialization
+- Highest spending patient
 
-Starter Data
-
-The system contains sample data for:
-
-Patients
-P001 - Ali Khan
-P002 - Ahmed Raza
-P003 - Sara Ahmed
-P004 - Usman Ali
-Doctors
-D001 - Dr. Hassan - Cardiology
-D002 - Dr. Sara - Dermatology
-D003 - Dr. Ahmed - General
-Medical Tests
-Test	Price
-ECG	$1500
-Blood Test	$1000
-X-Ray	$2500
-MRI	$8000
-Billing Rules
-
-The billing system follows these rules:
-
-Consultation Fee
-
-The doctor's consultation fee is added to the bill.
-
-Test Charges
-
-The prices of all selected medical tests are added to the bill.
-
-Insurance Coverage
-
-For insured patients:
-
-20% coverage on consultation fee
-50% coverage on test charges
-
-For patients without insurance:
-
-No insurance coverage
-Senior Citizen Discount
-
-Patients aged 60 or above receive a 10% senior citizen discount after insurance coverage.
-
-Appointment Processing
-
-Before processing an appointment, the system validates:
-
-Patient ID
-Doctor ID
-Doctor availability
-Appointment status
-Medical tests
-
-The system also prevents:
-
-Invalid patient IDs
-Invalid doctor IDs
-Invalid appointment IDs
-Invalid medical tests
-Duplicate tests
-Processing cancelled appointments
-Processing the same appointment more than once
-Cancelling completed appointments
-Cancelling an already cancelled appointment
-Reports
-
-The system generates different types of reports.
-
-Doctor Report
-
-The doctor report provides:
-
-Appointments per doctor
-Completed appointments
-Cancelled appointments
-Most requested doctor
-Most requested specialization
-Consultation revenue
-Patient Report
-
-The patient report provides:
-
-Appointments per patient
-Patient appointment status
-Total medical charges
-Insurance coverage
-Patient paid amount
-Highest spending patient
-Patient with most appointments
-Patients with no completed appointments
-Insured patients
-Senior citizen patients
-Clinic Report
-
-The clinic report provides:
-
-Total patients
-Total doctors
-Total appointments
-Completed appointments
-Cancelled appointments
-Pending appointments
-Consultation revenue
-Test revenue
-Insurance coverage
-Patient revenue
-Most requested specialization
-Highest spending patient
-Python Concepts Demonstrated
-Functions
-
-The project is divided into multiple functions so that each function performs a specific task.
+### ⚠️ Error Handling
+The project handles different errors and invalid cases using Python exception handling.
 
 Examples:
 
-calculate_test_charges()
-calculate_insurance_coverage()
-calculate_bill()
-cancel_appointment()
-patient_appointment_status()
+- Missing `data.json`
+- Invalid JSON format
+- Invalid patient ID
+- Invalid doctor ID
+- Invalid appointment ID
+- Invalid appointment status
+- Unavailable doctor
+- Invalid test
+- Duplicate test
+- Invalid age
+- Processing cancelled appointment
+- Processing completed appointment
+- Cancelling completed appointment
+
+### 🧪 Edge Case Testing
+The project includes tests for:
+
+- Invalid patient
+- Invalid doctor
+- Invalid appointment
+- Unavailable doctor
+- Invalid test
+- Duplicate test
+- Empty test list
+- Negative age
+- Invalid appointment status
+- Cancelling completed appointment
+- Processing cancelled appointment
+- Processing the same appointment twice
+- Patient with no appointments
+- Doctor with no appointments
+- Empty data
+
+---
+
+## 🧱 Data Models
+
+The project uses Python's built-in `dataclasses` module.
+
+### Patient
+
+```python
+@dataclass
+class Patient:
+    patient_id: str
+    name: str
+    age: int
+    city: str
+    insurance: bool
+
+Doctor
+@dataclass
+class Doctor:
+    doctor_id: str
+    name: str
+    specialization: str
+    fee: int
+    available: bool
+Appointment
+@dataclass
+class Appointment:
+    appointment_id: str
+    patient_id: str
+    doctor_id: str
+    status: str
+    tests: list
+📂 Project Structure
+hospital_appointment_billing/
+│
+├── main.py
+├── mainP.py
+├── models.py
+├── data.json
+├── README.md
+└── .gitignore
+File Description
+File	Description
+main.py	Main application logic
+mainP.py	Practice/testing file
+models.py	Python Dataclasses / Data Models
+data.json	Patient, doctor, and appointment data
+README.md	Project documentation
+📄 JSON Data
+
+The project stores its data in data.json.
+
+The JSON file contains:
+
+patients
+doctors
+appointments
+
+The JSON data is loaded using Python's built-in json module and then converted into Python Dataclass objects.
+
+🛠️ Technologies Used
+Python 3
+JSON
+Dataclasses
+Exception Handling
+Functions
+Lists
+Dictionaries
+Sets
+Lambda Functions
+List Comprehensions
 *args
-
-*args is used to calculate the total of multiple charges.
-
-Example:
-
-calculate_total(5000, 1500, 1000)
-
-Output:
-
-7500
 **kwargs
 
-**kwargs is used for configurable billing options such as insurance, senior discount, and tests.
+No external libraries are required.
 
-Example:
-
-calculate_configurable_bill(
-    5000,
-    insurance=True,
-    senior_discount=True,
-    include_tests=True
-)
-Lambda Function
-
-A lambda function is used to sort patients according to their bill amount.
-
-sorted(
-    paid_amount.items(),
-    key=lambda item: item[1],
-    reverse=True
-)
-List Comprehension
-
-List comprehensions are used to filter senior and insured patients.
-
-Example:
-
-[
-    patient_id
-    for patient_id, data in patients.items()
-    if data["age"] >= 60
-]
-LEGB
-
-The project also demonstrates Python's LEGB scope rule:
-
-Local
-Enclosing
-Global
-Built-in
-
-The global clinic_config dictionary is accessed inside functions.
-
-Edge Case Testing
-
-The project includes testing for important edge cases:
-
-Invalid patient ID
-Invalid doctor ID
-Invalid appointment ID
-Doctor unavailable
-Invalid medical test
-Duplicate medical test
-Empty test list
-Negative patient age
-Invalid appointment status
-Cancelling a completed appointment
-Processing a cancelled appointment
-Processing the same appointment twice
-Patient with no appointments
-Doctor with no appointments
-Empty data handling
-
-Example:
-
-Invalid Patient ID:
-(False, 'Patient P999 does not exist')
-
-Invalid Test:
-(False, 'Invalid Test: CT Scan')
-
-Duplicate Test:
-(False, 'duplicate test: ECG')
-
-Negative Age:
-(False, 'Age cannot be negative.')
-
-Cancel Completed Appointment:
-(False, 'Completed appointment cannot be cancelled.')
-Sample Output
-Clinic Dashboard
+▶️ How to Run
+1. Clone the repository
+git clone https://github.com/BushraInam01/hospital_appointment_billing.git
+2. Navigate to the project
+cd hospital_appointment_billing
+3. Run the application
+python3 main.py
+🧪 Example Output
 ========================================
-           CLINIC DASHBOARD
+     HOSPITAL APPOINTMENT & BILLING
 ========================================
+
 Total Patients: 4
 Total Doctors: 3
 Total Appointments: 5
-Completed: 3
-Cancelled: 2
-Pending: 0
-Total Consultation Revenue: $ 12000
-Total Test Revenue: $ 4000
-Total Insurance Coverage: $ 2250.0
-Total Patient Revenue: $ 13750.0
-Most Requested Specialization: ['cardiology', 'Dermatology']
-Highest Spending Patient: ['P004']
-========================================
-Billing Example
 
-For a $5000 consultation with ECG and Blood Test:
+Sample Bill:
+{
+    'Consultation_fee': 5000,
+    'test_charges': 2500,
+    'subtotal': 7500,
+    'insurance_coverage': 2250.0,
+    'patient_amount': 5250.0
+}
 
-Consultation Fee: $5000
-Test Charges: $2500
-Subtotal: $7500
-Insurance Coverage: $2250
-Patient Amount: $5250
-Design Decisions
+Senior Discount: 500.0
+Final Amount: 4500.0
+📚 Concepts Practiced
 
-The following design decisions were made while developing the system:
+This project demonstrates practical use of:
 
-1. Dictionaries for Patients and Doctors
+Functions
+Conditional statements
+Loops
+Lists and dictionaries
+Sets
+Exception handling
+JSON file handling
+Python Dataclasses
+Object-oriented concepts
+*args
+**kwargs
+Lambda functions
+List comprehensions
+LEGB rule
+Edge case testing
+🎯 Learning Objective
 
-Dictionaries are used because each patient and doctor has a unique ID and multiple related attributes.
+The main objective of this project was to practice Python programming concepts by building a real-world hospital appointment and billing system.
 
-For example:
-
-patients["P001"]
-doctors["D001"]
-
-This makes it easy to access records using their IDs.
-
-2. List for Appointments
-
-Appointments are stored in a list because multiple appointment records need to be maintained and processed.
-
-3. Functions for Logical Separation
-
-The project is divided into small functions. Each function handles one specific task, making the code easier to understand, test, and maintain.
-
-4. Reusable Billing Functions
-
-Billing calculations are separated into different functions such as:
-
-calculate_test_charges()
-calculate_insurance_coverage()
-calculate_bill()
-
-This avoids repeating the same billing logic in different parts of the program.
-
-5. Edge Case Handling
-
-Validation checks are included to prevent invalid data and incorrect operations, such as processing cancelled appointments or using invalid test names.
-
-6. Set for Duplicate Processing
-
-A set is used to keep track of already processed appointment IDs.
-
-processed_appointments = set()
-
-This prevents the same appointment from being processed multiple times.
-
-7. No External Dependencies
-
-The project uses only built-in Python features so it can run without installing additional packages.
-
-How to Run
-
-Make sure Python 3 is installed.
-
-Run the following command:
-
-python3 main.py
-
-The program will execute the test cases, reports, dashboard, and other required functionality.
-
-Conclusion
-
-This project demonstrates practical use of Python fundamentals in a real-world hospital appointment and billing scenario.
-
-It covers data management, validation, billing calculations, insurance handling, discounts, appointment processing, reporting, edge-case testing, and several important Python concepts including *args, **kwargs, lambda functions, list comprehensions, and LEGB scope.
-
-
-### Important
-
-Tumhare current project ke according **README mein koi coding change required nahi hai**. Ye documentation tumhare already completed code ko explain karti hai.  
-
-Bas `README.md` mein paste karke save kar do.
+The project also demonstrates how structured JSON data can be converted into Python data models using dataclasses, while handling invalid data and runtime errors safely.
