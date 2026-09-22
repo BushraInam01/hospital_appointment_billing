@@ -127,6 +127,7 @@ class Doctor:
     specialization: str
     fee: int
     available: bool
+    
 Appointment
 @dataclass
 class Appointment:
@@ -135,6 +136,8 @@ class Appointment:
     doctor_id: str
     status: str
     tests: list
+
+    
 📂 Project Structure
 hospital_appointment_billing/
 │
@@ -144,6 +147,8 @@ hospital_appointment_billing/
 ├── data.json
 ├── README.md
 └── .gitignore
+
+
 File Description
 File	Description
 main.py	Main application logic
